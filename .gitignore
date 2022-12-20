@@ -153,3 +153,5 @@ dmypy.json
 .idea/
 .vscode/
 db.sqlite3
+.env.development
+.env.production
