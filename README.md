@@ -8,7 +8,7 @@ A project that wrote with django and js
 ![alt text](https://imagizer.imageshack.com/img923/2043/3r81cH.png)
 
 # core based on:
-  - Python 3.8 version
+  - Python 3.10 version
   - Django 3.2 version
 
 # Technologies are used:
