@@ -3,6 +3,7 @@ from django.urls import path
 
 # Local imports.
 from core.urls import router
+from .api import PostViewSet, CommentViewSet, CategoryViewSet
 from .views import (
     PostView,
     PostsView,
@@ -13,7 +14,6 @@ from .views import (
     get_comments,
     like_comment,
 )
-from .api import PostViewSet, CommentViewSet, CategoryViewSet
 
 
 router.register(r'post_viewset', PostViewSet)
