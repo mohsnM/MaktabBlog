@@ -1,18 +1,20 @@
 from django import forms
-from django.contrib.auth.forms import UsernameField, AuthenticationForm
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import get_user_model
-from .validators import password_validator, fullname_validator
+from django.contrib.auth.forms import AuthenticationForm, UsernameField
+from django.utils.translation import ugettext_lazy as _
+
+from .validators import fullname_validator, password_validator
 
 User = get_user_model()
 
 
 class RegisterForm(forms.ModelForm):
-    password2 = forms.CharField(label=_('confirm password'), max_length=100, required=True,
-                                widget=forms.PasswordInput(
-                                    attrs={'class': 'mdl-textfield__input',
-                                           'placeholder': 'Confirm Password'}
-                                ))
+    password2 = forms.CharField(
+        label=_('confirm password'),
+        max_length=100,
+        required=True,
+        widget=forms.PasswordInput(attrs={'class': 'mdl-textfield__input', 'placeholder': 'Confirm Password'}),
+    )
 
     class Meta:
         model = User
@@ -36,13 +38,21 @@ class RegisterForm(forms.ModelForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = UsernameField(label=_("Email"), widget=forms.TextInput(
-        attrs={'autofocus': True, 'class': 'mdl-textfield__input', 'id': 'e-mail',
-               'placeholder': 'Email'}))
+    username = UsernameField(
+        label=_("Email"),
+        widget=forms.TextInput(
+            attrs={'autofocus': True, 'class': 'mdl-textfield__input', 'id': 'e-mail', 'placeholder': 'Email'}
+        ),
+    )
     password = forms.CharField(
         label=_("Password"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'current-password',
-                                          'class': 'mdl-textfield__input', 'id': 'password',
-                                          'placeholder': 'Password'}),
+        widget=forms.PasswordInput(
+            attrs={
+                'autocomplete': 'current-password',
+                'class': 'mdl-textfield__input',
+                'id': 'password',
+                'placeholder': 'Password',
+            }
+        ),
     )

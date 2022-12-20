@@ -1,6 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
-from django.db import models
 from django.contrib.auth.models import PermissionsMixin
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -48,8 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         _('active'),
         default=False,
         help_text=_(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
+            'Designates whether this user should be treated as active. ' 'Unselect this instead of deleting accounts.'
         ),
     )
 

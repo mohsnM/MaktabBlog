@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import (
-    Category, Post, PostSetting, Comment, CommentLike
-)
+
+from .models import Category, Comment, CommentLike, Post, PostSetting
 
 
 class ChildrenItemInline(admin.TabularInline):
@@ -18,8 +17,15 @@ class PostItemInline(admin.TabularInline):
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('slug', 'title', 'parent',)
-    search_fields = ('slug', 'title',)
+    list_display = (
+        'slug',
+        'title',
+        'parent',
+    )
+    search_fields = (
+        'slug',
+        'title',
+    )
     list_filter = ('parent',)
     prepopulated_fields = {'slug': ('title',)}
     list_per_page = 4
@@ -35,10 +41,15 @@ class PostSettingStackInline(admin.StackedInline):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'convert_create_date',
-                    'convert_publish_date', 'draft', 'author', 'comment_count')
-    search_fields = ('title', 'content',)
-    list_filter = ('draft', 'category',)
+    list_display = ('title', 'convert_create_date', 'convert_publish_date', 'draft', 'author', 'comment_count')
+    search_fields = (
+        'title',
+        'content',
+    )
+    list_filter = (
+        'draft',
+        'category',
+    )
     date_hierarchy = 'publish_time'
     prepopulated_fields = {'slug': ('title',)}
     raw_id_fields = ('author',)
@@ -62,10 +73,18 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ('post', 'author', 'is_confirmed',
-                    'like_count', 'dis_like_count',)
+    list_display = (
+        'post',
+        'author',
+        'is_confirmed',
+        'like_count',
+        'dis_like_count',
+    )
     search_fields = ('content',)
-    list_filter = ('author', 'is_confirmed',)
+    list_filter = (
+        'author',
+        'is_confirmed',
+    )
     list_editable = ('is_confirmed',)
     list_per_page = 6
 

@@ -9,7 +9,7 @@ A project that wrote with django and js
 
 # core based on:
   - Python 3.8 version
-  - Django 3.1 version
+  - Django 3.2 version
 
 # Technologies are used:
   - Celery
@@ -18,10 +18,10 @@ A project that wrote with django and js
   - Crispy
   - Django jet
 
-# Some issue that handel in this blog: ### 
+# Some issue that handel in this blog: ###
    - Register by email and active link
    - Simple panel for manage your account
-   - Authenticate 
+   - Authenticate
 
 # How to run it?
 

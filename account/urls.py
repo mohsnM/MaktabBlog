@@ -1,7 +1,9 @@
 from django.urls import path
-from .views import SingInView, SignUpView, SignOutView, ProfileView, activate
+
 from core.urls import router
+
 from .api import UserViewSet
+from .views import ProfileView, SignOutView, SignUpView, SingInView, activate
 
 router.register(r'users', UserViewSet)
 
@@ -12,5 +14,5 @@ urlpatterns = [
     path('logout/', SignOutView.as_view(), name='logout'),
     path('register/', SignUpView.as_view(), name='register'),
     path('activate/<uidb64>/<token>/', activate, name='activate'),
-    path('profile/', ProfileView.as_view(), name='profile')
+    path('profile/', ProfileView.as_view(), name='profile'),
 ]

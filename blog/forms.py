@@ -1,15 +1,14 @@
+from ckeditor.widgets import CKEditorWidget
 from django import forms
+
 from .models import Comment, Post
 from .validators import slug_validator
-from ckeditor.widgets import CKEditorWidget
 
 
 class PostForm(forms.ModelForm):
-
     class Meta:
         model = Post
-        fields = ('title', 'slug', 'category', 'content',
-                  'draft', 'publish_time', 'image')
+        fields = ('title', 'slug', 'category', 'content', 'draft', 'publish_time', 'image')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'slug': forms.TextInput(attrs={'class': 'form-control mb-3'}),
@@ -29,13 +28,11 @@ class PostForm(forms.ModelForm):
 class EditPostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'category', 'content',
-                  'draft', 'publish_time')
+        fields = ('title', 'category', 'content', 'draft', 'publish_time')
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control mb-3'}),
             'category': forms.Select(attrs={'class': 'form-control mb-3'}),
-            'content': forms.Textarea(attrs={'class': 'form-control mb-3', 'cols': 90,
-                                             'style': 'resize:none'}),
+            'content': forms.Textarea(attrs={'class': 'form-control mb-3', 'cols': 90, 'style': 'resize:none'}),
             'draft': forms.CheckboxInput(attrs={'class': 'form-control mb-3'}),
             'publish_time': forms.SelectDateWidget(attrs={'class': 'form-control mb-3'}),
         }

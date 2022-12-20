@@ -1,14 +1,17 @@
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+import json
+
+from django.db.utils import IntegrityError
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import reverse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Post, Comment, CommentLike, Category
-from .forms import PostForm, EditPostForm
-from .mixins import PostAuthorAccessMixin
-from django.views.generic import TemplateView, ListView, DetailView
+from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
+
 from account.mixins import AuthorAccessMixin
-from django.db.utils import IntegrityError
-import json
+
+from .forms import EditPostForm, PostForm
+from .mixins import PostAuthorAccessMixin
+from .models import Category, Comment, CommentLike, Post
 
 
 class PostsView(ListView):
@@ -79,12 +82,27 @@ def get_comments(request, slug):
     for parent, children in comments:
         children_list = list()
         for child in children:
-            children_list.append({'author': child.author.full_name, 'content': child.content,
-                                  'create_at': child.create_at, 'like_count': child.like_count,
-                                  'dislike_count': child.dis_like_count, 'id': child.id})
-        comments_dic.append({'author': parent.author.full_name, 'content': parent.content, 'id': parent.id,
-                             'create_at': parent.create_at, 'like_count': parent.like_count,
-                             'dislike_count': parent.dis_like_count, 'children': children_list})
+            children_list.append(
+                {
+                    'author': child.author.full_name,
+                    'content': child.content,
+                    'create_at': child.create_at,
+                    'like_count': child.like_count,
+                    'dislike_count': child.dis_like_count,
+                    'id': child.id,
+                }
+            )
+        comments_dic.append(
+            {
+                'author': parent.author.full_name,
+                'content': parent.content,
+                'id': parent.id,
+                'create_at': parent.create_at,
+                'like_count': parent.like_count,
+                'dislike_count': parent.dis_like_count,
+                'children': children_list,
+            }
+        )
 
     return JsonResponse(comments_dic, safe=False)
 

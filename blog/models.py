@@ -1,6 +1,6 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
@@ -13,13 +13,19 @@ class Post(models.Model):
     update_at = models.DateTimeField(_("Update at"), auto_now=True)
     publish_time = models.DateTimeField(_("Publish at"), db_index=True)
     draft = models.BooleanField(_("Draft"), default=True, db_index=True)
-    image = models.ImageField(
-        _("image"), upload_to='posts/images/', null=True, blank=True)
-    category = models.ForeignKey("Category", verbose_name=_("Category"),
-                                 on_delete=models.CASCADE, null=True, blank=True,
-                                 related_name='posts', related_query_name='posts')
-    author = models.ForeignKey(User, verbose_name=_("Author"), on_delete=models.CASCADE,
-                               related_name="posts", related_query_name="children")
+    image = models.ImageField(_("image"), upload_to='posts/images/', null=True, blank=True)
+    category = models.ForeignKey(
+        "Category",
+        verbose_name=_("Category"),
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='posts',
+        related_query_name='posts',
+    )
+    author = models.ForeignKey(
+        User, verbose_name=_("Author"), on_delete=models.CASCADE, related_name="posts", related_query_name="children"
+    )
 
     class Meta:
         verbose_name = _("Post")
@@ -30,16 +36,12 @@ class Post(models.Model):
         return self.title
 
     def create_setting(self, comment=True, author=True, allow_discussion=False):
-        return PostSetting.objects.create(
-            post=self, comment=comment, author=author, allow_discussion=allow_discussion
-        )
+        return PostSetting.objects.create(post=self, comment=comment, author=author, allow_discussion=allow_discussion)
 
     def get_comments(self):
         comments = []
         for com in self.comments.filter(parent=None):
-            comments.append(
-                (com, com.children.all())
-            )
+            comments.append((com, com.children.all()))
         return comments
 
     @property
@@ -60,8 +62,8 @@ class Post(models.Model):
 
 class PostSetting(models.Model):
     post = models.OneToOneField(
-        "Post", verbose_name=_("post"), on_delete=models.CASCADE,
-        related_name='setting', related_query_name='setting')
+        "Post", verbose_name=_("post"), on_delete=models.CASCADE, related_name='setting', related_query_name='setting'
+    )
     comment = models.BooleanField(_("comment"), default=True)
     author = models.BooleanField(_("author"), default=False)
     allow_discussion = models.BooleanField(_("allow discussion"), default=False)
@@ -74,8 +76,15 @@ class PostSetting(models.Model):
 class Category(models.Model):
     title = models.CharField(_("Title"), max_length=50)
     slug = models.SlugField(_("Slug"), unique=True, db_index=True)
-    parent = models.ForeignKey("self", verbose_name=_("Parent"), on_delete=models.SET_NULL, null=True, blank=True,
-                               related_name='children', related_query_name='children')
+    parent = models.ForeignKey(
+        "self",
+        verbose_name=_("Parent"),
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='children',
+        related_query_name='children',
+    )
 
     class Meta:
         verbose_name = _("Category")
@@ -89,10 +98,14 @@ class Category(models.Model):
 
 
 class CommentLike(models.Model):
-    author = models.ForeignKey(User, verbose_name=_(
-        "Author"), on_delete=models.CASCADE)
-    comment = models.ForeignKey('blog.Comment', verbose_name=_(
-        'Comment'), on_delete=models.CASCADE, related_name="comment_like", related_query_name="comment_like")
+    author = models.ForeignKey(User, verbose_name=_("Author"), on_delete=models.CASCADE)
+    comment = models.ForeignKey(
+        'blog.Comment',
+        verbose_name=_('Comment'),
+        on_delete=models.CASCADE,
+        related_name="comment_like",
+        related_query_name="comment_like",
+    )
     condition = models.BooleanField(_("Condition"))
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now=True)
@@ -108,17 +121,26 @@ class CommentLike(models.Model):
 
 class Comment(models.Model):
     content = models.TextField(_("Content"))
-    post = models.ForeignKey("Post", verbose_name=_("Post"),
-                             on_delete=models.CASCADE,
-                             related_name='comments', related_query_name='comments')
+    post = models.ForeignKey(
+        "Post",
+        verbose_name=_("Post"),
+        on_delete=models.CASCADE,
+        related_name='comments',
+        related_query_name='comments',
+    )
     create_at = models.DateTimeField(_("Create at"), auto_now_add=True)
     update_at = models.DateTimeField(_("Update at"), auto_now=True)
-    author = models.ForeignKey(User, verbose_name=_(
-        "Author"), on_delete=models.CASCADE)
+    author = models.ForeignKey(User, verbose_name=_("Author"), on_delete=models.CASCADE)
     is_confirmed = models.BooleanField(_("confirm"), default=True)
-    parent = models.ForeignKey('self', verbose_name=_('parent'), null=True,
-                               on_delete=models.CASCADE, blank=True,
-                               related_name='children', related_query_name='child')
+    parent = models.ForeignKey(
+        'self',
+        verbose_name=_('parent'),
+        null=True,
+        on_delete=models.CASCADE,
+        blank=True,
+        related_name='children',
+        related_query_name='child',
+    )
 
     class Meta:
         verbose_name = _("Comment")

@@ -1,18 +1,14 @@
-from django.forms import ValidationError
 from django.contrib.auth import get_user_model
+from django.forms import ValidationError
 
 User = get_user_model()
 
 
 def password_validator(password1, password2):
     if len(password1) < 8:
-        raise ValidationError(
-            'password is similar'
-        )
+        raise ValidationError('password is similar')
     if password1 != password2:
-        raise ValidationError(
-            'passwords are not match'
-        )
+        raise ValidationError('passwords are not match')
 
 
 def fullname_validator(full_name):
@@ -22,6 +18,4 @@ def fullname_validator(full_name):
         u = None
 
     if u is not None:
-        raise ValidationError(
-            'The name is exist'
-        )
+        raise ValidationError('The name is exist')

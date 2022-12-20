@@ -1,10 +1,18 @@
 from django.urls import path
+
 from blog.views import (
-    PostView, PostsView, CategoryView,
-    AddPostView, EditPostView, add_comment, like_comment, get_comments
+    AddPostView,
+    CategoryView,
+    EditPostView,
+    PostsView,
+    PostView,
+    add_comment,
+    get_comments,
+    like_comment,
 )
-from .api import PostViewSet, CategoryViewSet, CommentViewSet
 from core.urls import router
+
+from .api import CategoryViewSet, CommentViewSet, PostViewSet
 
 router.register(r'post_viewset', PostViewSet)
 router.register(r'category_viewset', CategoryViewSet)

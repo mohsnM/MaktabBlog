@@ -1,13 +1,15 @@
+from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
+
 from .models import User
 from .validators import password_validator
-from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
     """
     Serializer for user and get password for register and show other field
     """
+
     confirm_password = serializers.CharField(max_length=128, write_only=True)
 
     class Meta:
@@ -17,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id': {'read_only': True},
             'is_staff': {'read_only': True},
             'is_active': {'read_only': True},
-            'password': {'write_only': True}
+            'password': {'write_only': True},
         }
 
     def validate(self, data):

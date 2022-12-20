@@ -1,4 +1,5 @@
 from django import forms
+
 from .models import Post
 
 
@@ -9,13 +10,7 @@ def slug_validator(slug):
         p = None
 
     if p is not None:
-        raise forms.ValidationError(
-            'This slug is exist'
-        )
+        raise forms.ValidationError('This slug is exist')
 
     if slug.__contains__(' '):
-        raise forms.ValidationError(
-            'Slug is not valid'
-        )
-
-
+        raise forms.ValidationError('Slug is not valid')
