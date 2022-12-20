@@ -3,7 +3,7 @@ from django.urls import path
 
 # Local imports.
 from core.urls import router
-from blog.views import (
+from .views import (
     PostView,
     PostsView,
     AddPostView,

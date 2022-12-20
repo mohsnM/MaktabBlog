@@ -14,7 +14,7 @@ from django.contrib.auth.models import Group
 from django.contrib.sites.shortcuts import get_current_site
 
 # Local imports.
-from blog.models import Post
+from apps.blog.models import Post
 from .forms import LoginForm, RegisterForm
 from .mixins import AuthorAccessMixin
 from .tokens import account_activation_token

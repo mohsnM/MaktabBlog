@@ -10,7 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView
 from django.views.decorators.csrf import csrf_exempt
 
 # Local imports.
-from account.mixins import AuthorAccessMixin
+from apps.account.mixins import AuthorAccessMixin
 from .forms import PostForm, EditPostForm
 from .mixins import PostAuthorAccessMixin
 from .models import Post, Comment, Category, CommentLike
