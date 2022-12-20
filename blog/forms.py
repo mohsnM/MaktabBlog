@@ -1,7 +1,10 @@
-from ckeditor.widgets import CKEditorWidget
+# Core imports.
 from django import forms
 
-from .models import Comment, Post
+# Third-party imports.
+from ckeditor.widgets import CKEditorWidget
+
+from .models import Post, Comment
 from .validators import slug_validator
 
 

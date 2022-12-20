@@ -1,6 +1,7 @@
+# Core imports.
 from django.contrib import admin
 
-from .models import Category, Comment, CommentLike, Post, PostSetting
+from .models import Post, Comment, Category, CommentLike, PostSetting
 
 
 class ChildrenItemInline(admin.TabularInline):

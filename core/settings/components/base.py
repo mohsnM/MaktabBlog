@@ -1,6 +1,8 @@
+# Standard imports
 from pathlib import Path
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 ROOT_URLCONF = 'core.urls'
 

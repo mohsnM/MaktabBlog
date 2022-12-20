@@ -1,7 +1,11 @@
+# Core imports.
 from django.contrib.auth import get_user_model
+
+# Third-party imports.
 from rest_framework import serializers
 
-from .models import Category, Comment, Post
+from .models import Post, Comment, Category
+
 
 User = get_user_model()
 

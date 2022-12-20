@@ -1,5 +1,7 @@
-from django.contrib.auth import get_user_model
+# Core imports.
 from django.forms import ValidationError
+from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 

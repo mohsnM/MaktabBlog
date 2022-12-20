@@ -1,22 +1,24 @@
-from django.contrib.auth import get_user_model, login
-from django.contrib.auth.models import Group
-from django.contrib.auth.views import LoginView, LogoutView
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+# Core imports.
 from django.http import HttpResponse
-from django.shortcuts import redirect, render, reverse
-from django.template.loader import render_to_string
-from django.utils.encoding import force_bytes, force_text
+from django.core.mail import EmailMessage
+from django.shortcuts import render, reverse, redirect
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth import login, get_user_model
 from django.views.generic import ListView
+from django.utils.encoding import force_text, force_bytes
+from django.template.loader import render_to_string
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView
+from django.contrib.auth.models import Group
+from django.contrib.sites.shortcuts import get_current_site
 
+# Local imports.
 from blog.models import Post
-
 from .forms import LoginForm, RegisterForm
 from .mixins import AuthorAccessMixin
 from .tokens import account_activation_token
+
 
 User = get_user_model()
 

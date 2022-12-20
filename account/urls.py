@@ -1,9 +1,11 @@
+# Core imports.
 from django.urls import path
 
+# Local imports.
 from core.urls import router
-
 from .api import UserViewSet
-from .views import ProfileView, SignOutView, SignUpView, SingInView, activate
+from .views import SignUpView, SingInView, ProfileView, SignOutView, activate
+
 
 router.register(r'users', UserViewSet)
 

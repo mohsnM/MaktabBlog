@@ -1,3 +1,4 @@
+# Core imports.
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Post

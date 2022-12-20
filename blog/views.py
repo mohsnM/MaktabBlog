@@ -1,17 +1,19 @@
+# Standard imports
 import json
 
+# Core imports.
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.db.utils import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import reverse
-from django.views.decorators.csrf import csrf_exempt
-from django.views.generic import DetailView, ListView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView
+from django.views.decorators.csrf import csrf_exempt
 
+# Local imports.
 from account.mixins import AuthorAccessMixin
-
-from .forms import EditPostForm, PostForm
+from .forms import PostForm, EditPostForm
 from .mixins import PostAuthorAccessMixin
-from .models import Category, Comment, CommentLike, Post
+from .models import Post, Comment, Category, CommentLike
 
 
 class PostsView(ListView):

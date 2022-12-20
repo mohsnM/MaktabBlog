@@ -1,8 +1,9 @@
+# Core imports.
 from django.test import TestCase
 from django.utils.timezone import localtime
 
+# Local imports.
 from account.models import User
-
 from .models import Post
 
 

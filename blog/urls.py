@@ -1,18 +1,20 @@
+# Core imports.
 from django.urls import path
 
+# Local imports.
+from core.urls import router
 from blog.views import (
+    PostView,
+    PostsView,
     AddPostView,
     CategoryView,
     EditPostView,
-    PostsView,
-    PostView,
     add_comment,
     get_comments,
     like_comment,
 )
-from core.urls import router
+from .api import PostViewSet, CommentViewSet, CategoryViewSet
 
-from .api import CategoryViewSet, CommentViewSet, PostViewSet
 
 router.register(r'post_viewset', PostViewSet)
 router.register(r'category_viewset', CategoryViewSet)

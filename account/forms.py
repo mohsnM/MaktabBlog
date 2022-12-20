@@ -1,9 +1,11 @@
+# Core imports.
 from django import forms
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import AuthenticationForm, UsernameField
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.forms import UsernameField, AuthenticationForm
 
 from .validators import fullname_validator, password_validator
+
 
 User = get_user_model()
 

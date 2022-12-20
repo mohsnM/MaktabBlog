@@ -1,12 +1,20 @@
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
-from rest_framework.decorators import action
-from rest_framework.permissions import IsAdminUser, IsAuthenticated
+# Third-party imports.
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.decorators import action
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
+from rest_framework.authentication import (
+    BasicAuthentication,
+    SessionAuthentication,
+)
 
-from .models import Category, Comment, Post
+from .models import Post, Comment, Category
 from .permissions import HasAccessPermission
-from .serializers import CategoryModelSerializer, CommentModelSerializer, PostModelSerializer
+from .serializers import (
+    PostModelSerializer,
+    CommentModelSerializer,
+    CategoryModelSerializer,
+)
 
 
 class PostViewSet(ModelViewSet):
